@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Presentation Title - MidCamp 2015</title>
+		<title>Widgetizing WYSIWYG - MidCamp 2015</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -16,6 +16,9 @@
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/midcamp-color.css" id="theme">
+
+		<!-- FontAwesome -->
+		<link rel="stylesheet" href="lib/font/font-awesome-4.3.0/css/font-awesome.min.css">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -44,37 +47,702 @@
                     <p class="logo__site-name">#MidCamp</p>
                 </div>
                 <div class="session--info">
-                    <p class="session__title">Presentation title <span class="seperator">&nbsp;/&nbsp;</span></p>
-                    <p class="session__presenter">Speaker Name</p>
+                    <p class="session__title">Widgetizing WYSIWYG <span class="seperator">&nbsp;/&nbsp;</span></p>
+                    <p class="session__presenter">Brandon Neil</p>
                 </div>
             </div>
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
                 <section>
-                    <h1>Talk Title</h1>
-                    <h3>https://2015.midcamp.org/node/2222</h3>
+                    <h1>Widgetizing WYSIWYG</h1>
+                    <h3>http://2015.midcamp.org/node/69</h3>
                     <h3>MidCamp 2015</h3>
                     <h3>#MidCamp</h3>
                 </section>
 
                 <section>
-                    <h1>Speaker Name</h1>
-                    <h3>@username</h3>
-                    <h3>Company Name</h3>
-                    <h3>http://example.com</h3>
+                    <h1>Brandon Neil</h1>
+                    <h3><i class="fa fa-twitter"></i> <a href="http://twitter.com/brandonneil">@brandonneil</a></h3>
+                    <h3><i class="fa fa-drupal"></i> <a href="https://www.drupal.org/u/bneil">@bneil</a></h3>
+                    <img alt="The University of Iowa" src="images/domewordsingle__convertedwhite.png" style="border:none; background: none; box-shadow: none; margin: 0; max-width: 700px;" />
                 </section>
-
                 <section>
-                    <p>Put your slides here. Use the example slides/sections for ideas.
-                    We recommend your last two slides are:
-                    a reminder of the sprint,
-                    and a slide for questions/feedback.</p>
-                </section>
+									<h2>Widgetizing WYSIWYG</h2>
+									<h3>with CKEditor 4</h3>
+									<h4 class="fragment">Assumptions</h4>
+									<ul>
+										<li class="fragment">Built a Drupal module</li>
+										<li class="fragment">Javascript</li>
+									</ul>
+									<aside class="notes">
+										So today we're going to talk a bit about creating widgets in
+										CKEditor 4, a popular rich text editor. But before we get there, I'd like to take a step back and talk about Drupal.
+									</aside>
+								</section>
+								<section>
+									<h2>Structure</h2>
+									<ul class="fragment">
+										<li>Content types</li>
+										<li>Fields</li>
+										<li>View Modes</li>
+										<li>Image Styles</li>
+									</ul>
+									<aside class="notes">
+										Use this slide to creat an image the same size as the next, with those list items as blobs. Drupal is all about structure. We have fields, blocks, templates, etc.
+									</aside>
+								</section>
+                <section>
+									<h2>Structure<span class="fragment">?</span></h2>
+									<img src="images/emptybody.png" alt="Empty WYSIWYG text area" class="fragment"/>
+									<aside class="notes">
+										Drupal is all about structure. We have fields, blocks, templates, etc. But I've noticed that there's one place that's really hard for us to wrangle and that's this field right here.
+									</aside>
+								</section>
+                <section>
+									<h2>CKEditor 4</h2>
+									<h3 class="fragment">Rich text editor</h3>
+									<h3 class="fragment">What You See Is What You Get</h3>
+									<ul class="fragment">
+										<li>Open source</li>
+										<li>Accessible</li>
+										<li>Advanced Content Filter (ACF) - 4.1+</li>
+										<li>Widgets - 4.3+</li>
+									</ul>
+									<aside class="notes">
+										Explain the fun features of CKEditor 4, leaving Widgets for the next slide.
+									</aside>
+								</section>
+								<section>
+									<h2>CKEditor 4</h2>
+									<h3>Rich text editor</h3>
+									<h3>What You See Is What You Get</h3>
+									<ul>
+										<li>Open source</li>
+										<li>Accessible</li>
+										<li>Advanced Content Filter (ACF) - 4.1+</li>
+										<li><strong>Widgets - 4.3+</strong></li>
+									</ul>
+									<aside class="notes">
+										But what we're really here today to talk about are Widgets.
+									</aside>
+								</section>
+								<section>
+									<h2>Widgets</h2>
+									<figure><blockquote>Widgets are <strong>special rich content units</strong> in that they are <strong>groups of elements</strong> which are <strong>treated as a single entity</strong> inside the editor.</blockquote><figcaption><a href="http://docs.ckeditor.com/#!/guide/dev_widgets">- CKEditor documentation</a></figcaption></figure>
+								</section>
+								<section>
+									<h2>Characteristics of a Widget</h2>
+									<ul>
+										<li class="fragment">Structure is immutable</li>
+										<li class="fragment">Instance can be selected as a whole and moved around freely</li>
+										<li class="fragment">Individual parts can be edited</li>
+										<li class="fragment">Easy to enforce consistent styling of entire widget</li>
+										<li class="fragment">Can limit available elements inside of a widget</li>
+									</ul>
+									<aside class="notes">
+									</aside>
+								</section>
+								<section>
+									<h2>Examples</h2>
+									<ul>
+										<li><a href="http://ckeditor.com/addon/image2">Enhanced Image</a></li>
+										<li><a href="http://ckeditor.com/addon/mathjax">Mathematical Formulas</a></li>
+										<li><a href="http://ckeditor.com/addon/codesnippet">Code Snippet</a></li>
+										<li><a href="http://ckeditor.com/addon/leaflet">Leaflet Maps</a></li>
+									</ul>
+									<aside class="notes">
+									</aside>
+								</section>
+								<section>
+									<h1>Let's Create an Example Widget</h1>
+									<h2 class="fragment">A simple callout</h2>
+								</section>
+								<section>
+								<h1>Time to download things</h1>
+								<ul>
+									<li>CKEditor 4 Library</li>
+									<li>CKEditor or WYSIWYG module</li>
+								</ul>
+								<aside class="notes">
+									You'll need the CKEditor 4 javascript library and either the CKEditor module or WYSIWYG module. I'm going to use the WYSIWYG module in these examples because I'm more familiar with it, but will point out the corresponding CKEditor module hook.
+								</aside>
+								</section>
+								<section>
+									<h2>CKEditor Library Download</h2>
+									<p><a href="http://docs.ckeditor.com/#!/guide/dev_widget_installation">http://docs.ckeditor.com/#!/guide/dev_widget_installation</a></p>
+									<h3>New plugin</h3>
+									<h3>Not included in Basic, Standard, or Full packages :(</h3>
+								</section>
+								<section>
+									<h2>WYSIWYG Module</h2>
+									<p><a href="https://drupal.org/project/wysiwyg">https://drupal.org/project/wysiwyg</a></p>
+									<p>Dev version</p>
+								</section>
+								<section>
+									<h1>Let's build!</h1>
+								</section>
+								<section>
+									<h2>The Drupal-y bits</h2>
+								</section>
 
+								<section>
+									<img src="images/directory1.png">
+								</section>
+
+								<section>
+									<h3>midcamp_widgets.info</h3>
+									<pre><code>name = MidCamp Widgets
+description = Adds widgets to CKEditor
+
+core = 7.x
+
+dependencies[] = wysiwyg</code></pre>
+								</section>
+
+								<section>
+									<h3>midcamp_widgets.module</h3>
+									<h4>hook_wysiwyg_plugin() or hook_ckeditor_plugin()</h4>
+									<pre><code>/**
+ * Implements hook_wysiwyg_plugin().
+ */
+function midcamp_widgets_wysiwyg_plugin($editor, $version) {
+  switch ($editor) {
+    case 'ckeditor':
+      return array(
+        'callout' => array(
+          // The full path to the native editor plugin, no trailing slash.
+          // Ignored when 'internal' is set to TRUE below.
+          'path' => drupal_get_path('module', 'midcamp_widgets') . '/plugins/callout',
+          // The name of the plugin's main JavaScript file.
+          // Ignored when 'internal' is set to TRUE below.
+          // Default value depends on which editor the plugin is for.
+          'filename' => 'plugin.js',
+          // A list of buttons provided by this native plugin. The key has to
+          // match the corresponding JavaScript implementation. The value is
+          // is displayed on the editor configuration form only.
+          'buttons' => array(
+            'Callout' => t('Callout'),
+          ),
+          // Boolean whether the editor needs to load this plugin. When TRUE,
+          // the editor will automatically load the plugin based on the 'path'
+          // variable provided. If FALSE, the plugin either does not need to
+          // be loaded or is already loaded by something else on the page.
+          // Most plugins should define TRUE here.
+          'load' => TRUE,
+          // Boolean whether this plugin is a native plugin, i.e. shipped with
+          // the editor. Definition must be ommitted for plugins provided by
+          // other modules. TRUE means 'path' and 'filename' above are ignored
+          // and the plugin is instead loaded from the editor's plugin folder.
+          'internal' => FALSE,
+        ),
+      );
+      break;
+  }
+}</code></pre>
+								</section>
+								<section>
+									<h2>CKEditor API</h2>
+									<p>plugins/callout/plugin.js<p>
+									<img src="images/directory2.png" alt="added a callout/plugin.js file"/>
+								</section>
+								<section>
+									<h3>plugin.js</h3>
+									<pre><code>
+CKEDITOR.plugins.add('callout', {
+
+  requires: 'widget',
+
+  icons: 'callout',
+
+  init: function( editor ) {
+
+    editor.widgets.add( 'callout', {
+        // Button text on hover state.
+        button: 'Create a simple callout',
+
+        // The widget template.
+        template:
+            '<div class="callout">' +
+                '<div class="callout-content"><p>Callout!</p></div>' +
+            '</div>',
+
+        // Widget editable areas.
+        editables: {
+            content: {
+                selector: '.callout-content',
+                allowedContent: 'p br ul ol li strong em'
+            }
+        },
+
+        // ACF allowed content.
+        allowedContent: 'div(!callout,align-left,align-right,align-center){width});'+
+            'div(!callout-content);',
+
+        // Required content for the widget to function. If editor does not
+        // support this, the button does not function.
+        requiredContent: 'div(callout)',
+
+        // Function to determin if an element is a widget.
+        upcast: function( element ) {
+            return element.name == 'div' && element.hasClass( 'callout' );
+        }
+    });
+  }
+});
+</code></pre>
+								</section>
+								<section>
+									<h3>CKEditor docs</h3>
+									<h4><a href="http://docs.ckeditor.com/#!/api/CKEDITOR.plugins-method-add">CKEDITOR.plugins-method-add</a></h4>
+									<h4><a href="http://docs.ckeditor.com/#!/api/CKEDITOR.pluginDefinition">CKEDITOR.pluginDefinition</a></h4>
+									<h4><a href="http://docs.ckeditor.com/#!/api/CKEDITOR.plugins.widget.repository-method-add">CKEDITOR.plugins.widget.repository-method-add</a></h4>
+    							<h4><a href="http://docs.ckeditor.com/#!/api/CKEDITOR.plugins.widget.definition">CKEDITOR.plugins.widget.definition</a></h4>
+								</section>
+								<section>
+									<h3>Add your button icon</h3>
+									<img src="images/directory3.png" alt="added an icons/callout.png file"/>
+									<p>16x16px and 32x32px for hidpi</p>
+								</section>
+								<section>
+									<h3>Add default callout styling</h3>
+									<ul>
+										<li class="fragment">Create callout.css</li>
+										<li class="fragment">Load callout.css file in the WYSIWYG</li>
+										<li class="fragment">Load callout.css file on the front end</li>
+									</ul>
+    							<aside class="notes">Right now, the callout doesnt look that impressive. Let's add some css to make it look better.</aside>
+								</section>
+								<section>
+									<h4>Create callout.css</h4>
+									<img src="images/directory4.png" alt="Adds callout.css to the root of the module directory">
+    							<aside class="notes">Let's start by creating a callout.css file with our style.</aside>
+								</section>
+								<section>
+									<h4>Create callout.css (continued)</h4>
+									<pre><code>
+.callout {
+    padding: 8px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    max-width: 100%;
+    min-width: 200px;
+}</code></pre>
+								</section>
+								<section>
+									<h4>Load CSS in the WYSIWYG</h4>
+									<p>hook_ckeditor_settings_alter() or hook_wysiwyg_editor_settings_alter()</p>
+									<pre><code>/**
+ * Implements hook_wysiwyg_editor_settings_alter().
+ */
+function midcamp_widgets_wysiwyg_editor_settings_alter(&$settings, $context) {
+  // Check if the editor is CKEditor.
+  if ($context['profile']->editor == 'ckeditor') {
+
+    // Get module path.
+    $module_location = $GLOBALS['base_path'] . drupal_get_path('module', 'midcamp_widgets');
+
+    // Include custom css file.
+    $settings['contentsCss'][] = $module_location . '/callout.css';
+  }
+}</code></pre>
+								</section>
+								<section>
+									<h4>Load CSS in the front end</h4>
+									<p>Add to stylesheets in midcamp_widgets.info</p>
+									<pre><code>name = MidCamp Widgets
+description = Adds widgets to CKEditor
+
+core = 7.x
+
+dependencies[] = wysiwyg
+
+stylesheets[all][] = callout.css
+</code></pre>
+								</section>
+								<section>
+									<h4>Demo</h4>
+								</section>
+								<section>
+									<h3>Full plugin.js</h3>
+									<pre><code>
+CKEDITOR.plugins.add('callout', {
+
+  requires: 'widget',
+
+  icons: 'callout',
+
+  init: function( editor ) {
+
+    editor.widgets.add( 'callout', {
+
+        button: 'Create a simple callout',
+
+        template:
+            '<div class="callout">' +
+                '<div class="callout-content"><p>Callout!</p></div>' +
+            '</div>',
+
+        editables: {
+            content: {
+                selector: '.callout-content',
+                allowedContent: 'p br ul ol li strong em'
+            }
+        },
+
+        allowedContent: 'div(!callout); div(!callout-content);',
+
+        // Required content for the widget to function. If editor does not
+        // support this, the button does not function.
+        requiredContent: 'div(callout)',
+
+        upcast: function( element ) {
+            return element.name == 'div' && element.hasClass( 'callout' );
+        },
+    });
+  }
+});
+
+									</code></pre>
+								</section>
+								<section>
+									<h2>One more thing...</h2>
+									<p class="fragment">Creating a dialog for our widget</p>
+									<ul class="fragment">
+										<li>Set width</li>
+										<li>Set alignment via a class "align-right", etc</li>
+									</ul>
+								</section>
+								<section>
+									<img src="images/dialog.png" alt="CKEditor dialog with width and alignment fields">
+								</section>
+								<section>
+									<h3>Register the dialog window</h3>
+									<pre><code>
+CKEDITOR.plugins.add('callout', {
+  //Existing code...
+
+  init: function( editor ) {
+
+    editor.widgets.add( 'callout', {
+    		// Existing code...
+
+    		// Associate the callout dialog with this widget.
+        dialog: 'callout',
+
+    });
+
+    // Register the dialog and its path.
+    CKEDITOR.dialog.add( 'callout', this.path + 'dialogs/callout.js' );
+  }
+});
+									</code></pre>
+								</section>
+								<section>
+									<img src="images/directory5.png" alt="added dialog directory and inside callout.js file">
+								</section>
+								<section>
+									<h3>Create dialog callout.js</h3>
+									<pre><code>
+CKEDITOR.dialog.add( 'callout', function( editor ) {
+    return {
+        title: 'Edit Callout',
+        minWidth: 200,
+        minHeight: 100,
+        contents: [
+            {
+                id: 'info',
+                elements: [
+                    {
+                        id: 'align',
+                        type: 'select',
+                        label: 'Align',
+                        items: [
+                            [ editor.lang.common.notSet, '' ],
+                            [ editor.lang.common.alignLeft, 'left' ],
+                            [ editor.lang.common.alignRight, 'right' ],
+                            [ editor.lang.common.alignCenter, 'center' ]
+                        ],
+                        setup: function( widget ) {
+                            this.setValue( widget.data.align );
+                        },
+                        commit: function( widget ) {
+                            widget.setData( 'align', this.getValue() );
+                        }
+                    },
+                    {
+                        id: 'width',
+                        type: 'text',
+                        label: 'Width',
+                        width: '50px',
+                        setup: function( widget ) {
+                            this.setValue( widget.data.width );
+                        },
+                        commit: function( widget ) {
+                            widget.setData( 'width', this.getValue() );
+                        }
+                    }
+                ]
+            }
+        ]
+    };
+} );
+									</code></pre>
+								</section>
+								<section>
+									<h3>Styling - callout.css</h3>
+									<pre><code>
+@media all and (min-width: 600px) {
+    .callout.align-right {
+        float: right;
+    }
+    .callout.align-left {
+        float: left;
+    }
+}
+.callout.align-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+									</code></pre>
+								</section>
+								<section>
+									<h3>Alter allowedContent</h3>
+									<p>We don't want our new properties filtered out</p>
+									<pre><code>
+editor.widgets.add( 'callout', {
+    // Code before...
+
+    // ACF allowed content.
+    allowedContent: 'div(!callout,align-left,align-right,align-center){width});'+
+        'div(!callout-content);',
+
+    // Code after...
+});
+    							</code></pre>
+    						</section>
+    						<section>
+    							<h3>Widget init method</h3>
+    							<pre><code>
+editor.widgets.add( 'callout', {
+    // Code before...
+
+    init: function() {
+        var width = this.element.getStyle( 'width' );
+        if ( width )
+            this.setData( 'width', width );
+        if ( this.element.hasClass( 'align-left' ) )
+            this.setData( 'align', 'left' );
+        if ( this.element.hasClass( 'align-right' ) )
+            this.setData( 'align', 'right' );
+        if ( this.element.hasClass( 'align-center' ) )
+            this.setData( 'align', 'center' );
+    }
+});
+    							</code></pre>
+    						<aside class="notes">When a widget is being initialized we need to read its data (align and width) from DOM and set this data by using the widget.setData() method.</aside>
+    						</section>
+    						<section>
+    							<h3>Widget data method</h3>
+    							<pre><code>
+editor.widgets.add( 'callout', {
+    // Code before...
+
+    data: function() {
+        if ( this.data.width == '' )
+            this.element.removeStyle( 'width' );
+        else
+            this.element.setStyle( 'width', this.data.width );
+
+        this.element.removeClass( 'align-left' );
+        this.element.removeClass( 'align-right' );
+        this.element.removeClass( 'align-center' );
+        if ( this.data.align )
+            this.element.addClass( 'align-' + this.data.align );
+    }
+});
+    							</code></pre>
+    							<aside class="notes">The function we are going to define in the data property of the widget definition will be executed every time the widget data is changed. Widget data will be changed by using the widget.setData() method, which we previously added to commit functions of the dialog window fields.</aside>
+    						</section>
+    						<section>
+    							<h3>Final plugin.js code</h3>
+    							<pre><code>
+CKEDITOR.plugins.add('callout', {
+
+  // CKEditor plugin dependencies.
+  requires: 'widget',
+
+  // Icon file name. callout.png.
+  icons: 'callout',
+
+  // Plugin initialization method.
+  init: function( editor ) {
+
+    // Register our callout widget.
+    editor.widgets.add( 'callout', {
+        // Button text on hover state.
+        button: 'Create a simple callout',
+
+        // The widget template.
+        template:
+            '<div class="callout">' +
+                '<div class="callout-content"><p>Callout!</p></div>' +
+            '</div>',
+
+        // Widget editable areas.
+        editables: {
+            content: {
+                selector: '.callout-content',
+                allowedContent: 'p br ul ol li strong em'
+            }
+        },
+
+        // ACF allowed content.
+        allowedContent: 'div(!callout,align-left,align-right,align-center){width});'+
+            'div(!callout-content);',
+
+        // Required content for the widget to function. If editor does not
+        // support this, the button does not function.
+        requiredContent: 'div(callout)',
+
+        // Function to determin if an element is a widget.
+        upcast: function( element ) {
+            return element.name == 'div' && element.hasClass( 'callout' );
+        },
+
+        dialog: 'callout',
+
+        init: function() {
+            var width = this.element.getStyle( 'width' );
+            if ( width )
+                this.setData( 'width', width );
+            if ( this.element.hasClass( 'align-left' ) )
+                this.setData( 'align', 'left' );
+            if ( this.element.hasClass( 'align-right' ) )
+                this.setData( 'align', 'right' );
+            if ( this.element.hasClass( 'align-center' ) )
+                this.setData( 'align', 'center' );
+        },
+
+        data: function() {
+            if ( this.data.width == '' )
+                this.element.removeStyle( 'width' );
+            else
+                this.element.setStyle( 'width', this.data.width );
+
+            this.element.removeClass( 'align-left' );
+            this.element.removeClass( 'align-right' );
+            this.element.removeClass( 'align-center' );
+            if ( this.data.align )
+                this.element.addClass( 'align-' + this.data.align );
+        }
+    });
+    CKEDITOR.dialog.add( 'callout', this.path + 'dialogs/callout.js' );
+  }
+});
+
+    							</code></pre>
+    						</section>
+								<section>
+									<h2>One more thing...<span class="fragment">part two</span></h2>
+									<p class="fragment">Widget-based styles</p>
+								</section>
+								<section>
+									<h2>Widget-based styles</h2>
+									<img src="images/styles.png" alt="CKEditor styles dropdown for a widget"/>
+									<p>Creation of widget-only style options in the "Styles" dropdown</p>
+								</section>
+								<section>
+									<h3>CSS - callout.css</h3>
+									<pre><code>
+.primary {;
+  font-size: 1.2em;
+  line-height: 1.3em;
+  font-weight: 400;
+  background-color: #F2F2F2;
+  border: none;
+  border-top: 1px solid #DFDFDF;
+  border-bottom: 1px solid #DFDFDF;
+}
+
+.callout.fancy {
+    padding: 8px;
+    margin: 10px;
+    background: #eee;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 1px #fff inset, 0 -1px 0px #ccc inset;
+    max-width: 100%;
+    min-width: 200px;
+}
+
+.fancy .callout-content {
+    box-shadow: 0 1px 1px #ddd inset;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background: #fff;
+    padding: 8px;
+}
+									</code></pre>
+								</section>
+																<section>
+									<h3>Modify CKEditor styleSet array</h3>
+									<pre><code>
+/**
+ * Implements hook_wysiwyg_editor_settings_alter().
+ */
+function midcamp_widgets_wysiwyg_editor_settings_alter(&$settings, $context) {
+  // Check if the editor is CKEditor.
+  if ($context['profile']->editor == 'ckeditor') {
+
+    // Get module path.
+    $module_location = $GLOBALS['base_path'] . drupal_get_path('module', 'midcamp_widgets');
+
+    // Include custom css files.
+    $settings['contentsCss'][] = $module_location . '/callout.css';
+
+    // Define fancy style set.
+    $style_fancy = array(
+      'name' => 'Fancy',
+      'type' => 'widget',
+      'widget' => 'callout',
+      'attributes' => array(
+        'class' => 'fancy'
+      )
+    );
+
+    // Define primary style set.
+    $style_primary = array(
+      'name' => 'Primary',
+      'type' => 'widget',
+      'widget' => 'callout',
+      'attributes' => array(
+        'class' => 'primary'
+      )
+    );
+
+    $settings['stylesSet'][] = $style_fancy;
+    $settings['stylesSet'][] = $style_primary;
+
+  }
+}
+									</code></pre>
+									<p><a href="http://docs.ckeditor.com/#!/guide/dev_styles-section-widget-styles">CKEditor docs: widget styles</a></p>
+								</section>
+								<section>
+									<h2>Resources</h2>
+									<ul>
+										<li>Jeff Eaton: <a href="https://austin2014.drupal.org/session/battle-body-field-drupal-and-future-wysiwyg.html">The Battle for the Body Field</a></li>
+										<li>Les Lim: <a href="http://2014.tcdrupal.org/session/help-your-wysiwyg-help-you-creating-custom-ckeditor-widgets">Help your WYSIWYG help you: Creating custom CKEditor Widgets</a></li>
+										<li>CKEditor Documentation: <a href="http://docs.ckeditor.com/#!/guide/widget_sdk_tutorial_1">Creating a Simple CKEditor Widget</a></li>
+									</ul>
+								</section>
+								<section>
+									<h2>Questions?</h2>
+								</section>
                 <section>
                     <h3>Sprint Sunday 09:00-17:00</h3>
-                    <h3>The Nerdery, 300 N Elizabeth St., Suite 500C</h3>
+                    <h3>UIC Student Center East Tower, Room 605</h3>
                     <h3>http://2015.midcamp.org/schedule</h3>
                     <h2>Learn through contribution</h2>
                     <h3>Contributors of all skill sets and levels are welcome and encouraged.</h3>
@@ -83,348 +751,12 @@
 
                 <section>
                     <h1>Feedback</h1>
-                    <h3>https://joind.in/talk/view/222222</h3>
-                    <h3>Speaker Name: @username</h3>
+                    <h3>https://joind.in/talk/view/13822</h3>
+                    <h3>Speaker Name: @bneil</h3>
                     <h3>#MidCamp</h3>
-                    <aside class="notes">
-                        <p>Replace 222222 with your talk number.
-                        You need to go to
-                        https://joind.in/event/midcamp2015
-                        and add claim your talk.</p>
-                    </aside>
                 </section>
 
-				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
-				</section>
 
-				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
-				</section>
-
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
-						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
-
-				<section>
-					<h2>Slides</h2>
-					<p>
-						Not a coder? Not a problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slides.com" target="_blank">http://slides.com</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>Touch Optimized</h2>
-					<p>
-						Presentations look great on touch devices, like mobile phones and tablets. Simply swipe through your slides.
-					</p>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						Write content using inline or external Markdown.
-						Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-
-						```
-						<section data-markdown>
-						  ## Markdown support
-
-						  Write content using inline or external Markdown.
-						  Instructions and more info available in the [readme](https://github.com/hakimel/reveal.js#markdown).
-						</section>
-						```
-					</script>
-				</section>
-
-				<section>
-					<section id="fragments">
-						<h2>Fragments</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<p><span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span></p>
-
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's different types of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment current-visible">current-visible</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=slide#/transitions">Slide</a> -
-						<a href="?transition=convex#/transitions">Convex</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						reveal.js comes with a few themes built in: <br>
-						<!-- Hacks to swap themes after the page has loaded. Not flexible and only intended for the reveal.js demo deck. -->
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/black.css'); return false;">Black (default)</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/white.css'); return false;">White</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/league.css'); return false;">League</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/sky.css'); return false;">Sky</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/beige.css'); return false;">Beige</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/simple.css'); return false;">Simple</a> <br>
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/serif.css'); return false;">Serif</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/night.css'); return false;">Night</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/moon.css'); return false;">Moon</a> -
-						<a href="#" onclick="document.getElementById('theme').setAttribute('href','css/theme/solarized.css'); return false;">Solarized</a>
-					</p>
-				</section>
-
-				<section>
-					<section data-background="#dddddd">
-						<h2>Slide Backgrounds</h2>
-						<p>
-							Set <code>data-background="#dddddd"</code> on a slide to change the background color. All CSS color formats are supported.
-						</p>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png">
-						<h2>Image Backgrounds</h2>
-						<pre><code>&lt;section data-background="image.png"&gt;</code></pre>
-					</section>
-					<section data-background="https://s3.amazonaws.com/hakim-static/reveal-js/image-placeholder.png" data-background-repeat="repeat" data-background-size="100px">
-						<h2>Tiled Backgrounds</h2>
-						<pre><code style="word-wrap: break-word;">&lt;section data-background="image.png" data-background-repeat="repeat" data-background-size="100px"&gt;</code></pre>
-					</section>
-					<section data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000">
-						<div style="background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;">
-							<h2>Video Backgrounds</h2>
-							<pre><code style="word-wrap: break-word;">&lt;section data-background-video="video.mp4,video.webm"&gt;</code></pre>
-						</div>
-					</section>
-				</section>
-
-				<section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-					</p>
-					<pre><code>Reveal.configure({ backgroundTransition: 'zoom' })</code></pre>
-				</section>
-
-				<section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
-					<h2>Background Transitions</h2>
-					<p>
-						You can override background transitions per-slide.
-					</p>
-					<pre><code style="word-wrap: break-word;">&lt;section data-background-transition="zoom"&gt;</code></pre>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code data-trim contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-
-				<section>
-					<h2>Marvelous List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section>
-					<h2>Tabular Tables</h2>
-					<table>
-						<thead>
-							<tr>
-								<th>Item</th>
-								<th>Value</th>
-								<th>Quantity</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Apples</td>
-								<td>$1</td>
-								<td>7</td>
-							<tr>
-							<tr>
-								<td>Lemonade</td>
-								<td>$2</td>
-								<td>18</td>
-							<tr>
-							<tr>
-								<td>Bread</td>
-								<td>$3</td>
-								<td>2</td>
-							<tr>
-						</tbody>
-					</table>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;The nice thing about standards is that there are so many to choose from&rdquo;</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						&ldquo;For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.&rdquo;
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Speaker View</h2>
-					<p>There's a <a href="https://github.com/hakimel/reveal.js#speaker-notes">speaker view</a>. It includes a timer, preview of the upcoming slide as well as your speaker notes.</p>
-					<p>Press the <em>S</em> key to try it out.</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
-
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, here's an example:</p>
-					<iframe src="//www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				</section>
-
-				<section>
-					<h2>Global State</h2>
-					<p>
-						Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-						will be added as a class to the document element when the slide is open. This lets you
-						apply broader style changes, like switching the page background.
-					</p>
-				</section>
-
-				<section data-state="customevent">
-					<h2>State Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code class="javascript" data-trim contenteditable style="font-size: 18px;">
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-					</p>
-				</section>
-
-				<section>
-					<h2>Much more</h2>
-					<ul>
-						<li>Right-to-left support</li>
-						<li><a href="https://github.com/hakimel/reveal.js#api">Extensive JavaScript API</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#auto-sliding">Auto-progression</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#parallax-background">Parallax backgrounds</a></li>
-						<li><a href="https://github.com/hakimel/reveal.js#keyboard-bindings">Custom keyboard bindings</a></li>
-					</ul>
-				</section>
-
-				<section style="text-align: left;">
-					<h1>THE END</h1>
-					<p>
-						- <a href="http://slides.com">Try the online editor</a> <br>
-						- <a href="https://github.com/hakimel/reveal.js">Source code &amp; documentation</a>
-					</p>
-				</section>
 
 			</div>
 
@@ -443,7 +775,7 @@ Reveal.addEventListener( 'customevent', function() {
 				history: true,
 				center: true,
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				transition: 'none', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [
