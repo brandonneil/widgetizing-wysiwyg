@@ -1,4 +1,4 @@
-# [Slides](http://bit.ly/widgetizing)
+# [Slides](http://bit.ly/widgetizing-presentation)
 
 # [Widget code example](http://bit.ly/widgetizing-code)
 
