@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Widgetizing WYSIWYG - MidCamp 2015</title>
+		<title>Widgetizing WYSIWYG - DrupalCorn Camp 2015</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/midcamp-color.css" id="theme">
+		<link rel="stylesheet" href="css/theme/drupalcamp-color.css" id="theme">
 
 		<!-- FontAwesome -->
 		<link rel="stylesheet" href="lib/font/font-awesome-4.3.0/css/font-awesome.min.css">
@@ -43,8 +43,7 @@
 
             <div class="footer">
                 <div class="branding--logo">
-                    <span class="logo__image"><img src="lib/image/content/logo.png" alt="MidCamp 2015 logo" height="55px" /></span>
-                    <p class="logo__site-name">#MidCamp</p>
+                    <p class="logo__site-name">#drupalcorn</p>
                 </div>
                 <div class="session--info">
                     <p class="session__title">Widgetizing WYSIWYG <span class="seperator">&nbsp;/&nbsp;</span></p>
@@ -56,16 +55,17 @@
 			<div class="slides">
                 <section>
                     <h1>Widgetizing WYSIWYG</h1>
-                    <h3>http://2015.midcamp.org/node/69</h3>
-                    <h3>Slides: <a href="http://bit.ly/widgetizing-presentation">http://bit.ly/widgetizing-presentation</a>
-                    <h3>MidCamp 2015</h3>
-                    <h3>#MidCamp</h3>
+                    <h3>http://2015.drupalcorn.org/sessions/widgetizing-wysiwyg</h3>
+                    <h3>Slides: <a href="#">#</a>
+                    <h3>Code: <a href="https://github.com/brandonneil/campwidgets">https://github.com/brandonneil/campwidgets</a>
+                    <h3>DrupalCorn Camp 2015</h3>
+                    <h3>#drupalcorn</h3>
                 </section>
 
                 <section>
                     <h1>Brandon Neil</h1>
                     <h3><i class="fa fa-twitter"></i> <a href="http://twitter.com/brandonneil">@brandonneil</a></h3>
-                    <h3><i class="fa fa-drupal"></i> <a href="https://www.drupal.org/u/bneil">@bneil</a></h3>
+                    <h3><i class="fa fa-drupal"></i> <a href="https://www.drupal.org/u/bneil">bneil</a></h3>
                     <img alt="The University of Iowa" src="images/domewordsingle__convertedwhite.png" style="border:none; background: none; box-shadow: none; margin: 0; max-width: 700px;" />
                 </section>
                 <section>
@@ -73,7 +73,7 @@
 									<h3>with CKEditor 4</h3>
 									<h4 class="fragment">Assumptions</h4>
 									<ul>
-										<li class="fragment">Built a Drupal module</li>
+										<li class="fragment">Have implemented <a href="https://www.drupal.org/node/292">Drupal Hooks</a></li>
 										<li class="fragment">Javascript</li>
 									</ul>
 									<aside class="notes">
@@ -81,18 +81,30 @@
 										CKEditor 4, a popular rich text editor. But before we get there, I'd like to take a step back and talk about Drupal.
 									</aside>
 								</section>
+                <section>
+                  <h2>What we're covering</h2>
+                  <ul>
+                    <li class="fragment">What's a widget?</li>
+                    <li class="fragment">Widget examples</li>
+                    <li class="fragment">Utilizing a 'contrib' widget in Drupal</li>
+                    <li class="fragment">Creating our own widget</li>
+                  </ul>
+                </section>
 								<section>
-									<h2>Structure</h2>
-									<ul class="fragment">
-										<li>Content types</li>
-										<li>Fields</li>
-										<li>View Modes</li>
-										<li>Image Styles</li>
+									<h2>Drupal == Structure</h2>
+									<ul>
+										<li class="fragment">Content types</li>
+										<li class="fragment">Fields</li>
+										<li class="fragment">View Modes</li>
+										<li class="fragment">Image Styles</li>
 									</ul>
 									<aside class="notes">
 										Use this slide to creat an image the same size as the next, with those list items as blobs. Drupal is all about structure. We have fields, blocks, templates, etc.
 									</aside>
 								</section>
+                <section>
+                  <h2>¯\_(ツ)_/¯</h2>
+                </section>
                 <section>
 									<h2>Structure<span class="fragment">?</span></h2>
 									<img src="images/emptybody.png" alt="Empty WYSIWYG text area" class="fragment"/>
@@ -151,35 +163,98 @@
 										<li><a href="http://ckeditor.com/addon/mathjax">Mathematical Formulas</a></li>
 										<li><a href="http://ckeditor.com/addon/codesnippet">Code Snippet</a></li>
 										<li><a href="http://ckeditor.com/addon/leaflet">Leaflet Maps</a></li>
+                    <li><a href="http://ckeditor.com/addon/layoutmanager">Layout Manager</a></li>
 									</ul>
 									<aside class="notes">
 									</aside>
 								</section>
+                <section>
+                  <h2>Drupal Modules that utilize CKEditor Widgets</h2>
+                  <ul>
+                    <li>Drupal 8 Core</a></li>
+                    <li><a href="https://www.drupal.org/project/entity_embed">Drupal 7/8: Entity Embed</a></li>
+                    <li><a href="https://www.drupal.org/project/media_ckeditor">Drupal 7: Media CKEditor</a></li>
+                  </ul>
+                  <aside class="notes">
+                  </aside>
+                </section>
+                <section>
+                  <h1>Utilizing a 'contrib' widget in Drupal</h1>
+                </section>
+                <section>
+                  <h2>Task: build a Drupal module that adds a plugin (Layout Manager) to CKEditor.</h2>
+                </section>
+                <section>
+                  <h2>CKEditor widgets are plugins</h2>
+                </section>
+                <section>
+                  <h2>Plugins can be found in the CKEditor plugin repository</h2>
+                  <a href="http://ckeditor.com/addons/plugins/all">http://ckeditor.com/addons/plugins/all</a>
+                  <h3 class="fragment">(or on github, etc)</h3>
+                </section>
+                <section>
+                  <h2>Time to download things</h2>
+                  <ul>
+                    <li>CKEditor 4 Library</li>
+                    <li>CKEditor 4 Widget Plugin</li>
+                    <li>CKEditor or WYSIWYG module</li>
+                  </ul>
+                  <aside class="notes">
+                    You'll need the CKEditor 4 javascript library and either the CKEditor module or WYSIWYG module. I'm going to use the WYSIWYG module in these examples because I'm more familiar with it, but will point out the corresponding CKEditor module hook.
+                  </aside>
+                </section>
+                <section>
+                  <h2>CKEditor Library Download</h2>
+                  <p><a href="http://docs.ckeditor.com/#!/guide/dev_widget_installation">http://docs.ckeditor.com/#!/guide/dev_widget_installation</a></p>
+                </section>
+                <section>
+                  <h3>Use CKEditor Builder</h3>
+                  <p><a href="http://ckeditor.com/builder">http://ckeditor.com/builder</a></p>
+                </section>
+                <section>
+                  <h2>WYSIWYG Module</h2>
+                  <p><a href="https://drupal.org/project/wysiwyg">https://drupal.org/project/wysiwyg</a></p>
+                  <p>Dev version</p>
+                </section>
+                <section>
+                  <h1>Let's build!</h1>
+                  <ul>
+                    <li class="fragment">campwidgets.info</li>
+                    <li class="fragment">campwidgets.module</li>
+                  </ul>
+                </section>
+                <section>
+                  <h3>campwidgets.info</h3>
+                  <pre><code>name = Camp Widgets
+description = Adds widgets to CKEditor
+
+core = 7.x
+
+dependencies[] = wysiwyg</code></pre>
+                </section>
+                <section>
+                  <h3>campwidgets.module</h3>
+                  <h4>hook_wysiwyg_plugin() or hook_ckeditor_plugin()</h4>
+                </section>
+                <section>
+                  <h1>Creating Our Own CKEditor Widget</h1>
+                  <h2 class="fragment">A simple callout</h2>
+                  <h3>Code: <a href="http://bit.ly/widgetizing-code">http://bit.ly/widgetizing-code</a></h3>
+                </section>
+                </section>
+                <section>
+                  <h2>Task: build a CKEditor Plugin that includes a widget.</h2>
+                </section>
 								<section>
-									<h1>Let's Create an Example Widget</h1>
-									<h2 class="fragment">A simple callout</h2>
-									<h3>Code: <a href="http://bit.ly/widgetizing-code">http://bit.ly/widgetizing-code</a></h3>
-								</section>
-								<section>
-								<h1>Time to download things</h1>
+								<h1>Dependencies</h1>
 								<ul>
-									<li>CKEditor 4 Library</li>
-									<li>CKEditor or WYSIWYG module</li>
+									<li>CKEditor 4 Library &#10004;</li>
+                  <li>CKEditor 4 Widget Plugin &#10004;</li>
+									<li>CKEditor or WYSIWYG module &#10004;</li>
 								</ul>
 								<aside class="notes">
 									You'll need the CKEditor 4 javascript library and either the CKEditor module or WYSIWYG module. I'm going to use the WYSIWYG module in these examples because I'm more familiar with it, but will point out the corresponding CKEditor module hook.
 								</aside>
-								</section>
-								<section>
-									<h2>CKEditor Library Download</h2>
-									<p><a href="http://docs.ckeditor.com/#!/guide/dev_widget_installation">http://docs.ckeditor.com/#!/guide/dev_widget_installation</a></p>
-									<h3>New plugin</h3>
-									<h3>Not included in Basic, Standard, or Full packages :(</h3>
-								</section>
-								<section>
-									<h2>WYSIWYG Module</h2>
-									<p><a href="https://drupal.org/project/wysiwyg">https://drupal.org/project/wysiwyg</a></p>
-									<p>Dev version</p>
 								</section>
 								<section>
 									<h1>Let's build!</h1>
@@ -189,110 +264,17 @@
 								</section>
 
 								<section>
-									<img src="images/directory1.png">
-								</section>
-
+									<h3>campwidgets.info</h3>
+                  <span>(From earlier)</span>
+                </section>
 								<section>
-									<h3>midcamp_widgets.info</h3>
-									<pre><code>name = MidCamp Widgets
-description = Adds widgets to CKEditor
-
-core = 7.x
-
-dependencies[] = wysiwyg</code></pre>
-								</section>
-
-								<section>
-									<h3>midcamp_widgets.module</h3>
+									<h3>campwidgets.module</h3>
 									<h4>hook_wysiwyg_plugin() or hook_ckeditor_plugin()</h4>
-									<pre><code>/**
- * Implements hook_wysiwyg_plugin().
- */
-function midcamp_widgets_wysiwyg_plugin($editor, $version) {
-  switch ($editor) {
-    case 'ckeditor':
-      return array(
-        'callout' => array(
-          // The full path to the native editor plugin, no trailing slash.
-          // Ignored when 'internal' is set to TRUE below.
-          'path' => drupal_get_path('module', 'midcamp_widgets') . '/plugins/callout',
-          // The name of the plugin's main JavaScript file.
-          // Ignored when 'internal' is set to TRUE below.
-          // Default value depends on which editor the plugin is for.
-          'filename' => 'plugin.js',
-          // A list of buttons provided by this native plugin. The key has to
-          // match the corresponding JavaScript implementation. The value is
-          // is displayed on the editor configuration form only.
-          'buttons' => array(
-            'Callout' => t('Callout'),
-          ),
-          // Boolean whether the editor needs to load this plugin. When TRUE,
-          // the editor will automatically load the plugin based on the 'path'
-          // variable provided. If FALSE, the plugin either does not need to
-          // be loaded or is already loaded by something else on the page.
-          // Most plugins should define TRUE here.
-          'load' => TRUE,
-          // Boolean whether this plugin is a native plugin, i.e. shipped with
-          // the editor. Definition must be ommitted for plugins provided by
-          // other modules. TRUE means 'path' and 'filename' above are ignored
-          // and the plugin is instead loaded from the editor's plugin folder.
-          'internal' => FALSE,
-        ),
-      );
-      break;
-  }
-}</code></pre>
-								</section>
+                </section>
 								<section>
 									<h2>CKEditor API</h2>
 									<p>plugins/callout/plugin.js<p>
 									<img src="images/directory2.png" alt="added a callout/plugin.js file"/>
-								</section>
-								<section>
-									<h3>plugin.js</h3>
-									<pre><code>
-CKEDITOR.plugins.add('callout', {
-
-  requires: 'widget',
-
-  icons: 'callout',
-
-  init: function( editor ) {
-
-    editor.widgets.add( 'callout', {
-        // Button text on hover state.
-        button: 'Create a simple callout',
-
-        // The widget template.
-        template:
-            '<div class="callout">' +
-                '<div class="callout-content"><p>Callout!</p></div>' +
-            '</div>',
-
-        // Widget editable areas.
-        editables: {
-            content: {
-                selector: '.callout-content',
-                allowedContent: 'p br ul ol li strong em'
-            }
-        },
-
-        // ACF allowed content.
-        allowedContent: 'div(!callout,align-left,align-right,align-center){width});'+
-            'div(!callout-content);',
-
-        // Required content for the widget to function. If editor does not
-        // support this, the button does not function.
-        requiredContent: 'div(callout)',
-
-        // Function to determin if an element is a widget.
-        upcast: function( element ) {
-            return element.name == 'div' && element.hasClass( 'callout' );
-        }
-    });
-  }
-});
-</code></pre>
 								</section>
 								<section>
 									<h3>CKEditor docs</h3>
@@ -321,33 +303,9 @@ CKEDITOR.plugins.add('callout', {
     							<aside class="notes">Let's start by creating a callout.css file with our style.</aside>
 								</section>
 								<section>
-									<h4>Create callout.css (continued)</h4>
-									<pre><code>
-.callout {
-    padding: 8px;
-    margin: 10px;
-    border: 1px solid #ddd;
-    max-width: 100%;
-    min-width: 200px;
-}</code></pre>
-								</section>
-								<section>
 									<h4>Load CSS in the WYSIWYG</h4>
 									<p>hook_ckeditor_settings_alter() or hook_wysiwyg_editor_settings_alter()</p>
-									<pre><code>/**
- * Implements hook_wysiwyg_editor_settings_alter().
- */
-function midcamp_widgets_wysiwyg_editor_settings_alter(&$settings, $context) {
-  // Check if the editor is CKEditor.
-  if ($context['profile']->editor == 'ckeditor') {
-
-    // Get module path.
-    $module_location = $GLOBALS['base_path'] . drupal_get_path('module', 'midcamp_widgets');
-
-    // Include custom css file.
-    $settings['contentsCss'][] = $module_location . '/callout.css';
-  }
-}</code></pre>
+                  <span>Let's add to our hook implementation from earlier</span>
 								</section>
 								<section>
 									<h4>Load CSS in the front end</h4>
@@ -444,52 +402,7 @@ CKEDITOR.plugins.add('callout', {
 									<img src="images/directory5.png" alt="added dialog directory and inside callout.js file">
 								</section>
 								<section>
-									<h3>Create dialog callout.js</h3>
-									<pre><code>
-CKEDITOR.dialog.add( 'callout', function( editor ) {
-    return {
-        title: 'Edit Callout',
-        minWidth: 200,
-        minHeight: 100,
-        contents: [
-            {
-                id: 'info',
-                elements: [
-                    {
-                        id: 'align',
-                        type: 'select',
-                        label: 'Align',
-                        items: [
-                            [ editor.lang.common.notSet, '' ],
-                            [ editor.lang.common.alignLeft, 'left' ],
-                            [ editor.lang.common.alignRight, 'right' ],
-                            [ editor.lang.common.alignCenter, 'center' ]
-                        ],
-                        setup: function( widget ) {
-                            this.setValue( widget.data.align );
-                        },
-                        commit: function( widget ) {
-                            widget.setData( 'align', this.getValue() );
-                        }
-                    },
-                    {
-                        id: 'width',
-                        type: 'text',
-                        label: 'Width',
-                        width: '50px',
-                        setup: function( widget ) {
-                            this.setValue( widget.data.width );
-                        },
-                        commit: function( widget ) {
-                            widget.setData( 'width', this.getValue() );
-                        }
-                    }
-                ]
-            }
-        ]
-    };
-} );
-									</code></pre>
+									<h3>Create dialog callout.js file</h3>
 								</section>
 								<section>
 									<h3>Styling - callout.css</h3>
@@ -646,7 +559,7 @@ CKEDITOR.plugins.add('callout', {
     							</code></pre>
     						</section>
 								<section>
-									<h2>One more thing...<span class="fragment">part two</span></h2>
+									<h2>Another thing...</h2>
 									<p class="fragment">Widget-based styles</p>
 								</section>
 								<section>
@@ -693,12 +606,14 @@ CKEDITOR.plugins.add('callout', {
 /**
  * Implements hook_wysiwyg_editor_settings_alter().
  */
-function midcamp_widgets_wysiwyg_editor_settings_alter(&$settings, $context) {
+function campwidgets_wysiwyg_editor_settings_alter(&$settings, $context) {
   // Check if the editor is CKEditor.
   if ($context['profile']->editor == 'ckeditor') {
 
+    $settings['layoutmanager_loadbootstrap'] = TRUE;
+
     // Get module path.
-    $module_location = $GLOBALS['base_path'] . drupal_get_path('module', 'midcamp_widgets');
+    $module_location = $GLOBALS['base_path'] . drupal_get_path('module', 'campwidgets');
 
     // Include custom css files.
     $settings['contentsCss'][] = $module_location . '/callout.css';
@@ -725,7 +640,6 @@ function midcamp_widgets_wysiwyg_editor_settings_alter(&$settings, $context) {
 
     $settings['stylesSet'][] = $style_fancy;
     $settings['stylesSet'][] = $style_primary;
-
   }
 }
 									</code></pre>
@@ -734,7 +648,6 @@ function midcamp_widgets_wysiwyg_editor_settings_alter(&$settings, $context) {
 								<section>
 									<h2>Resources</h2>
 									<ul>
-										<li>Jeff Eaton: <a href="https://austin2014.drupal.org/session/battle-body-field-drupal-and-future-wysiwyg.html">The Battle for the Body Field</a></li>
 										<li>Les Lim: <a href="http://2014.tcdrupal.org/session/help-your-wysiwyg-help-you-creating-custom-ckeditor-widgets">Help your WYSIWYG help you: Creating custom CKEditor Widgets</a></li>
 										<li>CKEditor Documentation: <a href="http://docs.ckeditor.com/#!/guide/widget_sdk_tutorial_1">Creating a Simple CKEditor Widget</a></li>
 									</ul>
@@ -743,19 +656,8 @@ function midcamp_widgets_wysiwyg_editor_settings_alter(&$settings, $context) {
 									<h2>Questions?</h2>
 								</section>
                 <section>
-                    <h3>Sprint Sunday 09:00-17:00</h3>
-                    <h3>UIC Student Center East Tower, Room 605</h3>
-                    <h3>http://2015.midcamp.org/schedule</h3>
-                    <h2>Learn through contribution</h2>
-                    <h3>Contributors of all skill sets and levels are welcome and encouraged.</h3>
-                    <p>#MidCamp</p>
-                </section>
-
-                <section>
                     <h1>Feedback</h1>
-                    <h3>https://joind.in/talk/view/13822</h3>
-                    <h3>Speaker Name: @bneil</h3>
-                    <h3>#MidCamp</h3>
+                    <h3>https://2015.drupalcorn.org/evaluation</h3>
                 </section>
 
 
